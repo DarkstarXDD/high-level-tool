@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 import random
 import json
+import re
+import subprocess
 
 BG_COLOR = "#232425"
 TEXT_COLOR_100 = "#FFFFFF"
@@ -18,12 +20,12 @@ FONT_VALUE = "Poppins SemiBold"
 SIDEBAR_BUTTON_ACTIVE_CLR = "#313335"
 PRIMARY_BLUE = "#4E8FE4"
 
-SIDEBAR_WIDTH = 0.2
+SIDEBAR_WIDTH = 0.15
 CURRENT_FRAME_HEIGHT = 0.95
 
 window = tk.Tk()
 window.title("High Level Tool")
-window.geometry("1300x650")
+window.geometry("1400x650")
 window.configure(background=BG_COLOR)
 # window.resizable(False, False)
 
@@ -192,10 +194,69 @@ class GeneralFrame(ttk.Frame):
         with open("./tooltips.json", "r") as tooltips_file:
             self.tooltips = json.load(tooltips_file)
 
+        self.general_data = {
+            "hostname": "",
+            "ipaddress_v4": "",
+            "ipaddress_v6": "",
+            "mac_address": "",
+            "router_ipv4": "",
+            "router_ipv6": "",
+        }
+
+        # Run ipconfig command
+        output_1 = subprocess.check_output(["ipconfig", "/all"]).decode("utf-8")
+        # print(output_1)
+
+        # Define regular expression pattern to match IPv4 address
+        hostname_pattern = r"Host Name[.\s]+: (.+)"
+        ipv4_pattern = r"IPv4 Address[.\s]+: ([\d.]+)"
+        ipv6_pattern = r"IPv6 Address[.\s]+: ([\da-fA-F:]+)"
+
+        # Search for Hostname address in the output
+        match = re.search(hostname_pattern, output_1)
+
+        if match:
+            hostname = match.group(1)
+            print(f"Hostname: {hostname}")
+            self.general_data["hostname"] = hostname
+        else:
+            print("Hostname Address not found")
+            self.general_data = "-"
+
+        # Search for IPv4 address in the output
+        match = re.search(ipv4_pattern, output_1)
+
+        if match:
+            ipv4_address = match.group(1)
+            print(f"IPv4 Address: {ipv4_address}")
+            self.general_data["ipaddress_v4"] = ipv4_address
+        else:
+            print("IPv4 Address not found")
+            self.general_data["ipaddress_v4"] = "-"
+
+        # Search for IPv6 address in the output
+        match = re.search(ipv6_pattern, output_1)
+
+        if match:
+            ipv6_address = match.group(1)
+            print(f"IPv6 Address: {ipv6_address}")
+            self.general_data["ipaddress_v6"] = ipv6_address
+        else:
+            print("IPv6 Address not found")
+            self.general_data["ipaddress_v6"] = "-"
+
+        mac_address = self.get_mac_address()
+        if mac_address:
+            print("MAC Address:", mac_address)
+            self.general_data["mac_address"] = mac_address
+        else:
+            print("Unable to retrieve MAC address.")
+            self.general_data["mac_address"] = "-"
+
         self.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         # Get all the data
-        self.general_data = self.get_general_data()
+        # self.general_data = self.get_general_data()
         self.geolocation_data = self.get_geolocation_data()
 
         # Styles
@@ -230,12 +291,36 @@ class GeneralFrame(ttk.Frame):
 
         self.columnconfigure((0, 1, 2), weight=1, uniform="a")
         self.rowconfigure(0, weight=1)  # Adjusted weight to 6 (1.2 * 5)
-        self.rowconfigure(1, weight=12)  # Adjusted weight to 9 (1.8 * 5)
+        self.rowconfigure(1, weight=2)  # Adjusted weight to 9 (1.8 * 5)
 
         computer = self.section_computer(col=0, row=0, colspan=1, rowspan=1)
         router = self.section_router(col=1, row=0, colspan=1, rowspan=1)
         public = self.section_public(col=2, row=0, colspan=1, rowspan=1)
         geo_location = self.section_geolocation(col=0, row=1, colspan=3, rowspan=1)
+
+    def get_mac_address(self):
+        try:
+            output = subprocess.check_output(
+                ["ipconfig", "/all"], universal_newlines=True
+            )
+            # Split the output into sections for each adapter
+            adapters_info = output.split("\n\n")
+            for adapter_info in adapters_info:
+                # Check if the adapter is connected
+                if (
+                    "Media State . . . . . . . . . . . : Media disconnected"
+                    not in adapter_info
+                ):
+                    # Extract MAC address from the adapter information
+                    mac_match = re.search(
+                        r"Physical Address[ .:]+([0-9A-Fa-f-]+)", adapter_info
+                    )
+                    if mac_match:
+                        return mac_match.group(1)
+            return None
+        except subprocess.CalledProcessError:
+            print("Error: Failed to execute ipconfig command.")
+            return None
 
     # Default Layout for All the Sections
     def section_default(self, col, row, colspan, rowspan):
@@ -258,7 +343,7 @@ class GeneralFrame(ttk.Frame):
         section = self.section_default(col, row, colspan, rowspan)
 
         section.columnconfigure(0, weight=1)
-        section.columnconfigure(1, weight=6)
+        section.columnconfigure(1, weight=1)
         section.rowconfigure((0, 1, 2, 3, 4), weight=1)
 
         # Logo & Section Heading

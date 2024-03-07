@@ -1,45 +1,5 @@
-import re
 import subprocess
-
-# Run ipconfig command
-output_1 = subprocess.check_output(["ipconfig", "/all"]).decode("utf-8")
-# print(output_1)
-
-
-# Define regular expression pattern to match IPv4 address
-hostname_pattern = r"Host Name[.\s]+: (.+)"
-ipv4_pattern = r"IPv4 Address[.\s]+: ([\d.]+)"
-ipv6_pattern = r"IPv6 Address[.\s]+: ([\da-fA-F:]+)"
-
-
-# Search for Hostname address in the output
-match = re.search(hostname_pattern, output_1)
-
-if match:
-    hostname = match.group(1)
-    print(f"Hostname: {hostname}")
-else:
-    print("Hostname Address not found")
-
-
-# Search for IPv4 address in the output
-match = re.search(ipv4_pattern, output_1)
-
-if match:
-    ipv4_address = match.group(1)
-    print(f"IPv4 Address: {ipv4_address}")
-else:
-    print("IPv4 Address not found")
-
-
-# Search for IPv6 address in the output
-match = re.search(ipv6_pattern, output_1)
-
-if match:
-    ipv6_address = match.group(1)
-    print(f"IPv6 Address: {ipv6_address}")
-else:
-    print("IPv6 Address not found")
+import re
 
 
 def get_mac_address():
