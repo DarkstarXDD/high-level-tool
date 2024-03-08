@@ -1,3 +1,5 @@
+import getGeoLocationData
+
 import tkinter as tk
 from tkinter import ttk
 import random
@@ -194,6 +196,8 @@ class GeneralFrame(ttk.Frame):
         with open("./tooltips.json", "r") as tooltips_file:
             self.tooltips = json.load(tooltips_file)
 
+        self.geolocation_data = getGeoLocationData.GeoLocationData()
+
         self.general_data = {
             "hostname": "",
             "ipaddress_v4": "",
@@ -257,7 +261,7 @@ class GeneralFrame(ttk.Frame):
 
         # Get all the data
         # self.general_data = self.get_general_data()
-        self.geolocation_data = self.get_geolocation_data()
+        # self.geolocation_data = self.get_geolocation_data()
 
         # Styles
         self.style = ttk.Style()
@@ -494,7 +498,7 @@ class GeneralFrame(ttk.Frame):
         )
 
         # Public IPv4
-        p_ipv4 = self.get_public_ipv4()
+        p_ipv4 = self.geolocation_data.public_ip
         p_ipv4_name = ttk.Label(
             section, text="Your Public IPv4", style="label_name.TLabel"
         )
@@ -543,8 +547,8 @@ class GeneralFrame(ttk.Frame):
             pady=(10, 10),
         )
 
-        continent = self.geolocation_data["continent"]
-        continent_code = self.geolocation_data["continentCode"]
+        continent = self.geolocation_data.continent
+        continent_code = self.geolocation_data.continent_code
         continent_name = ttk.Label(section, text="Continent", style="label_name.TLabel")
         continent_value = ttk.Label(
             section, text=f"{continent} ({continent_code})", style="label_value.TLabel"
@@ -552,8 +556,8 @@ class GeneralFrame(ttk.Frame):
         continent_name.grid(column=0, row=2, sticky="nesw", padx=(10, 0), pady=(0, 5))
         continent_value.grid(column=1, row=2, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        country = self.geolocation_data["country"]
-        country_code = self.geolocation_data["countryCode"]
+        country = self.geolocation_data.country
+        country_code = self.geolocation_data.country_code
         country_name = ttk.Label(section, text="Country", style="label_name.TLabel")
         country_value = ttk.Label(
             section, text=f"{country} ({country_code})", style="label_value.TLabel"
@@ -561,55 +565,55 @@ class GeneralFrame(ttk.Frame):
         country_name.grid(column=0, row=3, sticky="nesw", padx=(10, 0), pady=(0, 5))
         country_value.grid(column=1, row=3, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        region = self.geolocation_data["regionName"]
+        region = self.geolocation_data.region_name
         region_name = ttk.Label(section, text="Region", style="label_name.TLabel")
         region_value = ttk.Label(section, text=region, style="label_value.TLabel")
         region_name.grid(column=0, row=4, sticky="nesw", padx=(10, 0), pady=(0, 5))
         region_value.grid(column=1, row=4, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        city = self.geolocation_data["city"]
+        city = self.geolocation_data.city
         city_name = ttk.Label(section, text="City", style="label_name.TLabel")
         city_value = ttk.Label(section, text=city, style="label_value.TLabel")
         city_name.grid(column=0, row=5, sticky="nesw", padx=(10, 0), pady=(0, 5))
         city_value.grid(column=1, row=5, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        district = self.geolocation_data["district"]
+        district = self.geolocation_data.district
         district_name = ttk.Label(section, text="District", style="label_name.TLabel")
         district_value = ttk.Label(section, text=district, style="label_value.TLabel")
         district_name.grid(column=0, row=6, sticky="nesw", padx=(10, 0), pady=(0, 5))
         district_value.grid(column=1, row=6, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        zip = self.geolocation_data["zip"]
+        zip = self.geolocation_data.zipcode
         zip_name = ttk.Label(section, text="Zip", style="label_name.TLabel")
         zip_value = ttk.Label(section, text=zip, style="label_value.TLabel")
         zip_name.grid(column=0, row=7, sticky="nesw", padx=(10, 0), pady=(0, 5))
         zip_value.grid(column=1, row=7, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        lat = self.geolocation_data["lat"]
+        lat = self.geolocation_data.lat
         lat_name = ttk.Label(section, text="Latitude", style="label_name.TLabel")
         lat_value = ttk.Label(section, text=lat, style="label_value.TLabel")
         lat_name.grid(column=0, row=8, sticky="nesw", padx=(10, 0), pady=(0, 5))
         lat_value.grid(column=1, row=8, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        lon = self.geolocation_data["lon"]
+        lon = self.geolocation_data.lon
         lon_name = ttk.Label(section, text="Longitude", style="label_name.TLabel")
         lon_value = ttk.Label(section, text=lon, style="label_value.TLabel")
         lon_name.grid(column=0, row=9, sticky="nesw", padx=(10, 0), pady=(0, 5))
         lon_value.grid(column=1, row=9, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        timezone = self.geolocation_data["timezone"]
+        timezone = self.geolocation_data.timezone
         timezone_name = ttk.Label(section, text="Timezone", style="label_name.TLabel")
         timezone_value = ttk.Label(section, text=timezone, style="label_value.TLabel")
         timezone_name.grid(column=0, row=10, sticky="nesw", padx=(10, 0), pady=(0, 5))
         timezone_value.grid(column=1, row=10, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        currency = self.geolocation_data["currency"]
+        currency = self.geolocation_data.currency
         currency_name = ttk.Label(section, text="Currency", style="label_name.TLabel")
         currency_value = ttk.Label(section, text=currency, style="label_value.TLabel")
         currency_name.grid(column=0, row=11, sticky="nesw", padx=(10, 0), pady=(0, 5))
         currency_value.grid(column=1, row=11, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        isp = self.geolocation_data["isp"]
+        isp = self.geolocation_data.isp
         isp_name = ttk.Label(section, text="ISP", style="label_name.TLabel")
         isp_value = ttk.Label(section, text=isp, style="label_value.TLabel")
         isp_name.grid(column=2, row=2, sticky="nesw", padx=(10, 0), pady=(0, 5))
@@ -623,13 +627,13 @@ class GeneralFrame(ttk.Frame):
             lambda event: hover_text_bar.set_hover_label(""),
         )
 
-        org = self.geolocation_data["org"]
+        org = self.geolocation_data.org
         org_name = ttk.Label(section, text="Organization", style="label_name.TLabel")
         org_value = ttk.Label(section, text=org, style="label_value.TLabel")
         org_name.grid(column=2, row=3, sticky="nesw", padx=(10, 0), pady=(0, 5))
         org_value.grid(column=3, row=3, sticky="nesw", padx=(0, 10), pady=(0, 5))
 
-        asn = self.geolocation_data["as"]
+        asn = self.geolocation_data.asn
         asn_name = ttk.Label(section, text="ASN", style="label_name.TLabel")
         asn_value = ttk.Label(section, text=asn, style="label_value.TLabel")
         asn_name.grid(column=2, row=4, sticky="nesw", padx=(10, 0), pady=(0, 5))
@@ -643,7 +647,7 @@ class GeneralFrame(ttk.Frame):
             lambda event: hover_text_bar.set_hover_label(""),
         )
 
-        asname = self.geolocation_data["asname"]
+        asname = self.geolocation_data.as_name
         asname_name = ttk.Label(section, text="AS Name", style="label_name.TLabel")
         asname_value = ttk.Label(section, text=asname, style="label_value.TLabel")
         asname_name.grid(column=2, row=5, sticky="nesw", padx=(10, 0), pady=(0, 5))
@@ -669,33 +673,29 @@ class GeneralFrame(ttk.Frame):
 
         return general_data
 
-    def get_public_ipv4(self):
-        public_ip_v4 = "112.134.1.39"
-        return public_ip_v4
+    # def get_geolocation_data(self):
+    #     geolocation_data = {
+    #         "continent": "Asia",
+    #         "continentCode": "AS",
+    #         "country": "Sri Lanka",
+    #         "countryCode": "LK",
+    #         "region": "1",
+    #         "regionName": "Western Province",
+    #         "city": "Battaramulla South",
+    #         "district": "",
+    #         "zip": "10120",
+    #         "lat": 6.8929,
+    #         "lon": 79.9187,
+    #         "timezone": "Asia/Colombo",
+    #         "offset": 19800,
+    #         "currency": "LKR",
+    #         "isp": "SLTADSL-SLT",
+    #         "org": "",
+    #         "as": "AS9329 Sri Lanka Telecom Internet",
+    #         "asname": "SLTINT-AS-AP",
+    #     }
 
-    def get_geolocation_data(self):
-        geolocation_data = {
-            "continent": "Asia",
-            "continentCode": "AS",
-            "country": "Sri Lanka",
-            "countryCode": "LK",
-            "region": "1",
-            "regionName": "Western Province",
-            "city": "Battaramulla South",
-            "district": "",
-            "zip": "10120",
-            "lat": 6.8929,
-            "lon": 79.9187,
-            "timezone": "Asia/Colombo",
-            "offset": 19800,
-            "currency": "LKR",
-            "isp": "SLTADSL-SLT",
-            "org": "",
-            "as": "AS9329 Sri Lanka Telecom Internet",
-            "asname": "SLTINT-AS-AP",
-        }
-
-        return geolocation_data
+    # return geolocation_data
 
 
 class NetInterfaces(ttk.Frame):
