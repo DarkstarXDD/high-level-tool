@@ -1,4 +1,5 @@
 import getGeoLocationData
+import portScanner
 
 import tkinter as tk
 from tkinter import ttk
@@ -715,6 +716,7 @@ currentframe = CurrentFrame(mainframe)
 hover_text_bar = HoverTextBar(mainframe)
 general_frame = GeneralFrame(currentframe)
 net_interfaces = NetInterfaces(currentframe)
+port_scanner = portScanner.PortScanner(currentframe)
 
 # general_frame.lift()
 # print(general_frame)
