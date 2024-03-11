@@ -128,3 +128,121 @@ class GeneralFrame(ctk.CTkFrame):
         # Dummy
         dummy_3 = ctk.CTkLabel(frame_public, text="")
         dummy_3.grid(column=0, row=4, sticky="nesw", padx=(10, 0), pady=(0, 5))
+
+        # ------------------------------------------------------------------------
+        # -------------------------------- GeoIP --------------------------------
+        # ------------------------------------------------------------------------
+        frame_geoip.columnconfigure(0, weight=1)
+        frame_geoip.columnconfigure(1, weight=2)
+        frame_geoip.columnconfigure(2, weight=1)
+        frame_geoip.columnconfigure(3, weight=2)
+        frame_geoip.rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), weight=1)
+
+        # Logo & Section Heading
+        label_geoip = ctk.CTkLabel(frame_geoip, text="IP Geolocation")
+        label_geoip.grid(columnspan=2, rowspan=1, sticky="nesw", padx=(10), pady=(10))
+
+        # Continent & Continent Code
+        # continent = self.geolocation_data.continent
+        continent = "Asia"
+        # continent_code = self.geolocation_data.continent_code
+        continent_code = "AS"
+        continent_name = ctk.CTkLabel(frame_geoip, text="Continent")
+        continent_value = ctk.CTkLabel(
+            frame_geoip, text=f"{continent} ({continent_code})"
+        )
+        continent_name.grid(column=0, row=2, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        continent_value.grid(column=1, row=2, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # country = self.geolocation_data.country
+        country = "Sri Lanka"
+        # country_code = self.geolocation_data.country_code
+        country_code = "LK"
+        country_name = ctk.CTkLabel(frame_geoip, text="Country")
+        country_value = ctk.CTkLabel(frame_geoip, text=f"{country} ({country_code})")
+        country_name.grid(column=0, row=3, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        country_value.grid(column=1, row=3, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # region = self.geolocation_data.region_name
+        region = "Western Province"
+        region_name = ctk.CTkLabel(frame_geoip, text="Region")
+        region_value = ctk.CTkLabel(frame_geoip, text=region)
+        region_name.grid(column=0, row=4, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        region_value.grid(column=1, row=4, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # city = self.geolocation_data.city
+        city = "Battaramulla South"
+        city_name = ctk.CTkLabel(frame_geoip, text="City")
+        city_value = ctk.CTkLabel(frame_geoip, text=city)
+        city_name.grid(column=0, row=5, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        city_value.grid(column=1, row=5, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # district = self.geolocation_data.district
+        district = "-"
+        district_name = ctk.CTkLabel(frame_geoip, text="District")
+        district_value = ctk.CTkLabel(frame_geoip, text=district)
+        district_name.grid(column=0, row=6, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        district_value.grid(column=1, row=6, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # zipcode = self.geolocation_data.zipcode
+        zipcode = "10120"
+        zip_name = ctk.CTkLabel(frame_geoip, text="Zip")
+        zip_value = ctk.CTkLabel(frame_geoip, text=zipcode)
+        zip_name.grid(column=0, row=7, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        zip_value.grid(column=1, row=7, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # lat = self.geolocation_data.lat
+        lat = "80.6554"
+        lat_name = ctk.CTkLabel(frame_geoip, text="Latitude")
+        lat_value = ctk.CTkLabel(frame_geoip, text=lat)
+        lat_name.grid(column=0, row=8, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        lat_value.grid(column=1, row=8, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # lon = self.geolocation_data.lon
+        lon = "6.98"
+        lon_name = ctk.CTkLabel(frame_geoip, text="Longitude")
+        lon_value = ctk.CTkLabel(frame_geoip, text=lon)
+        lon_name.grid(column=0, row=9, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        lon_value.grid(column=1, row=9, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # timezone = self.geolocation_data.timezone
+        timezone = "Asia/AS"
+        timezone_name = ctk.CTkLabel(frame_geoip, text="Timezone")
+        timezone_value = ctk.CTkLabel(frame_geoip, text=timezone)
+        timezone_name.grid(column=0, row=10, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        timezone_value.grid(column=1, row=10, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # currency = self.geolocation_data.currency
+        currency = "LK"
+        currency_name = ctk.CTkLabel(frame_geoip, text="Currency")
+        currency_value = ctk.CTkLabel(frame_geoip, text=currency)
+        currency_name.grid(column=0, row=11, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        currency_value.grid(column=1, row=11, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # isp = self.geolocation_data.isp
+        isp = "SLT - Sri Lanka Telecom"
+        isp_name = ctk.CTkLabel(frame_geoip, text="ISP")
+        isp_value = ctk.CTkLabel(frame_geoip, text=isp)
+        isp_name.grid(column=2, row=2, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        isp_value.grid(column=3, row=2, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # org = self.geolocation_data.org
+        org = "-"
+        org_name = ctk.CTkLabel(frame_geoip, text="Organization")
+        org_value = ctk.CTkLabel(frame_geoip, text=org)
+        org_name.grid(column=2, row=3, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        org_value.grid(column=3, row=3, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # asn = self.geolocation_data.asn
+        asn = "SLT123"
+        asn_name = ctk.CTkLabel(frame_geoip, text="ASN")
+        asn_value = ctk.CTkLabel(frame_geoip, text=asn)
+        asn_name.grid(column=2, row=4, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        asn_value.grid(column=3, row=4, sticky="nesw", padx=(0, 10), pady=(0, 5))
+
+        # asname = self.geolocation_data.as_name
+        asname = "SLT"
+        asname_name = ctk.CTkLabel(frame_geoip, text="AS Name")
+        asname_value = ctk.CTkLabel(frame_geoip, text=asname)
+        asname_name.grid(column=2, row=5, sticky="nesw", padx=(10, 0), pady=(0, 5))
+        asname_value.grid(column=3, row=5, sticky="nesw", padx=(0, 10), pady=(0, 5))
