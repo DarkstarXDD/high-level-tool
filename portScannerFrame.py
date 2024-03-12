@@ -8,6 +8,11 @@ class PortScannerFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
 
+        self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
+        self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
+        self.poppins_200 = ctk.CTkFont(family="Poppins", size=14)
+        self.cascadia_200 = ctk.CTkFont(family="Cascadia Mono", size=14)
+
         self.configure(corner_radius=0, fg_color="#242424")
         self.place(relx=0, rely=0, relwidth=1, relheight=1)
 
@@ -23,33 +28,52 @@ class PortScannerFrame(ctk.CTkFrame):
 
         # Place the 3 Frames (Sections)
         frame_top.grid(row=0, sticky="nesw", padx=10, pady=(10, 5))
+
         frame_middle.grid(row=1, sticky="nesw", padx=10, pady=5)
+        frame_middle.configure(fg_color="#242424")
+
         frame_bottom.grid(row=2, sticky="nesw", padx=10, pady=(5, 10))
 
-        # --------------- Create & Place Labels ---------------
+        # ------------------------------------------------------------------------
+        # ---------------------- Labels - Create & Place  ------------------------
+        # ------------------------------------------------------------------------
         frame_top.columnconfigure(0, weight=1, uniform="a")
         frame_top.columnconfigure(1, weight=2, uniform="a")
         frame_top.columnconfigure(2, weight=2, uniform="a")
         frame_top.rowconfigure((0, 1, 2), weight=1, uniform="a")
 
-        label_target = ctk.CTkLabel(frame_top, text="Target IP")
-        label_start = ctk.CTkLabel(frame_top, text="Start Port")
-        label_end = ctk.CTkLabel(frame_top, text="End Port")
+        label_target = ctk.CTkLabel(frame_top, text="Target IP", anchor="w")
+        label_target.configure(font=self.poppins_200)
 
-        label_target.grid(row=0, column=0, sticky="nesw", padx=5, pady=5)
-        label_start.grid(row=1, column=0, sticky="nesw", padx=5, pady=5)
-        label_end.grid(row=2, column=0, sticky="nesw", padx=5, pady=5)
+        label_start = ctk.CTkLabel(frame_top, text="Start Port", anchor="w")
+        label_start.configure(font=self.poppins_200)
 
-        # --------------- Create & Place Inputs ---------------
+        label_end = ctk.CTkLabel(frame_top, text="End Port", anchor="w")
+        label_end.configure(font=self.poppins_200)
+
+        label_target.grid(row=0, column=0, sticky="nesw", padx=15, pady=5)
+        label_start.grid(row=1, column=0, sticky="nesw", padx=15, pady=5)
+        label_end.grid(row=2, column=0, sticky="nesw", padx=15, pady=5)
+
+        # ------------------------------------------------------------------------
+        # ----------------------- Inputs - Create & Place  -----------------------
+        # ------------------------------------------------------------------------
         self.input_target = ctk.CTkEntry(frame_top)
+        self.input_target.insert(0, "192.168.1.1")
+
         self.input_start = ctk.CTkEntry(frame_top)
+        self.input_start.insert(0, "1")
+
         self.input_end = ctk.CTkEntry(frame_top)
+        self.input_end.insert(0, "1024")
 
         self.input_target.grid(row=0, column=1, sticky="nesw", padx=5, pady=5)
         self.input_start.grid(row=1, column=1, sticky="nesw", padx=5, pady=5)
         self.input_end.grid(row=2, column=1, sticky="nesw", padx=5, pady=5)
 
-        # --------------- Create & Place Buttons ---------------
+        # ------------------------------------------------------------------------
+        # ----------------------- Buttons - Create & Place  ----------------------
+        # ------------------------------------------------------------------------
         self.button_reset = ctk.CTkButton(frame_top)
         self.button_reset.configure(text="Reset")
 
@@ -70,19 +94,37 @@ class PortScannerFrame(ctk.CTkFrame):
         self.button_start.grid(row=1, column=2, sticky="nesw", padx=(100, 10), pady=5)
         self.button_cancel.grid(row=2, column=2, sticky="nesw", padx=(100, 10), pady=5)
 
-        # PortScan()
+        # ------------------------------------------------------------------------
+        # ------------------- Main Output - Create & Place  ----------------------
+        # ------------------------------------------------------------------------
+        self.main_output = ctk.CTkTextbox(frame_middle, font=self.cascadia_200)
+        self.main_output.pack(expand=True, fill="both")
 
-    def handle_start_click(self):
+    # ------------------------------------------------------------------------
+    # ------------------ Port Scan and Handle Button Clicks ------------------
+    # ------------------------------------------------------------------------
+    def run_port_scan(self):
         target_ip = self.input_target.get()
         starting_port = self.input_start.get()
         ending_port = self.input_end.get()
 
-        PortScan(target_ip, starting_port, ending_port)
+        self.main_output.delete("1.0", "end")
+
+        PortScan(target_ip, starting_port, ending_port, self.main_output)
         print("Port Scan is done!")
+        self.main_output.insert("end", "\nPort Scan is done!")
+
+    # ------------------------------------------------------------------------
+    # ------ Run the port scan in a new thread. So the GUI won't freeze ------
+    # ------------------------------------------------------------------------
+    def handle_start_click(self):
+        threading.Thread(target=self.run_port_scan).start()
 
 
 class PortScan:
-    def __init__(self, ip, start, end):
+    def __init__(self, ip, start, end, main_output):
+
+        self.main_output = main_output
 
         self.target_ip = str(ip)
         self.port_start = int(start)
@@ -96,7 +138,7 @@ class PortScan:
         port_list = range(self.port_start, self.port_end)
         self.fill_queue(port_list)
 
-        for t in range(100):
+        for t in range(10):
             thread = threading.Thread(target=self.worker)
             self.thread_list.append(thread)
 
@@ -127,4 +169,9 @@ class PortScan:
 
             if self.scan_port(port):
                 print(f"Port {port} is open!")
+                self.main_output.insert(
+                    "end", f" \nPort {port} on {self.target_ip} is open!"
+                )
+                # self.main_output.see("end")
+
                 self.open_ports.append(port)
