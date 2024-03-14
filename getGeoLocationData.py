@@ -34,10 +34,3 @@ class GeoLocationData:
         self.as_name = formatted_data["asname"]
 
         print("Request to the API endpoint was made")
-
-
-# geolocation_data = GeoLocationData()
-
-# print(geolocation_data.public_ip)
-# print(geolocation_data.country_code)
-# print(geolocation_data.city)

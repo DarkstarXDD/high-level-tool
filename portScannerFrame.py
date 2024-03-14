@@ -3,6 +3,8 @@ import socket
 import threading
 import queue
 
+PORTSCAN_THREAD_COUNT = 100
+
 
 class PortScannerFrame(ctk.CTkFrame):
     def __init__(self, parent):
@@ -138,7 +140,7 @@ class PortScan:
         port_list = range(self.port_start, self.port_end)
         self.fill_queue(port_list)
 
-        for t in range(10):
+        for t in range(PORTSCAN_THREAD_COUNT):
             thread = threading.Thread(target=self.worker)
             self.thread_list.append(thread)
 
