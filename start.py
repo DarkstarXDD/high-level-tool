@@ -1,6 +1,7 @@
 import sidebar
 import sidebarButton as sb
 import currentFrame
+import hoverArea
 import generalFrame
 import networkFrame
 import wifiFrame
@@ -13,6 +14,11 @@ import macAddressFrame
 import getGeoLocationData
 
 import customtkinter as ctk
+import json
+
+
+SIDEBAR_WIDTH = 0.15
+CURRENT_FRAME_HEIGHT = 0.95
 
 
 class RunApp:
@@ -22,11 +28,17 @@ class RunApp:
         window.title("High Level Tool")
         window.geometry("1400x650")
 
-        sidebar_frame = sidebar.Sidebar(window)
-        current_frame = currentFrame.CurrentFrame(window)
+        sidebar_frame = sidebar.Sidebar(window, SIDEBAR_WIDTH)
+        current_frame = currentFrame.CurrentFrame(
+            window, SIDEBAR_WIDTH, CURRENT_FRAME_HEIGHT
+        )
+        hover_area = hoverArea.HoverArea(window, SIDEBAR_WIDTH, CURRENT_FRAME_HEIGHT)
+
+        with open(file="tooltips.json", mode="r") as file:
+            data = json.load(file)
 
         # Frames
-        general_frame = generalFrame.GeneralFrame(current_frame)
+        general_frame = generalFrame.GeneralFrame(current_frame, hover_area, data)
         network_frame = networkFrame.NetworkFrame(current_frame)
         wifi_frame = wifiFrame.WiFiFrame(current_frame)
         ipscan_frame = ipScannerFrame.IPScannerFrame(current_frame)

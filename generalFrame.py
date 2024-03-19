@@ -6,7 +6,7 @@ LP = 15  # PadX - Left
 
 
 class GeneralFrame(ctk.CTkFrame):
-    def __init__(self, parent):
+    def __init__(self, parent, hover, tooltips):
         super().__init__(parent)
 
         self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
@@ -51,11 +51,12 @@ class GeneralFrame(ctk.CTkFrame):
         hostname_name.configure(font=self.poppins_200)
         hostname_name.grid(column=0, row=1, sticky="nesw", padx=(LP, 0), pady=(0, 5))
 
-        hostname_value = ctk.CTkLabel(
-            frame_pc, text=hostname, anchor="w", font=self.poppins_300
-        )
-        hostname_value.configure(font=self.poppins_300)
+        hostname_value = ctk.CTkLabel(frame_pc, text=hostname, anchor="w")
         hostname_value.grid(column=1, row=1, sticky="nesw", padx=(0, 10), pady=(0, 5))
+        hostname_value.configure(font=self.poppins_300)
+
+        hostname_name.bind("<Enter>", lambda event: hover.display(tooltips["hostname"]))
+        hostname_name.bind("<Leave>", lambda event: hover.display(""))
 
         # IPv4
         # ipv4 = self.general_data["ipaddress_v4"]
@@ -67,6 +68,9 @@ class GeneralFrame(ctk.CTkFrame):
         ipv4_value.grid(column=1, row=2, sticky="nesw", padx=(0, 10), pady=(0, 5))
         ipv4_value.configure(font=self.poppins_300)
 
+        ipv4_name.bind("<Enter>", lambda event: hover.display(tooltips["ipv4"]))
+        ipv4_name.bind("<Leave>", lambda event: hover.display(""))
+
         # IPv6
         # ipv6 = self.general_data["ipaddress_v6"]
         ipv6_name = ctk.CTkLabel(frame_pc, text="IPv6", anchor="w")
@@ -77,15 +81,21 @@ class GeneralFrame(ctk.CTkFrame):
         ipv6_value.grid(column=1, row=3, sticky="nesw", padx=(0, 10), pady=(0, 5))
         ipv6_value.configure(font=self.poppins_300)
 
+        ipv6_name.bind("<Enter>", lambda event: hover.display(tooltips["ipv6"]))
+        ipv6_name.bind("<Leave>", lambda event: hover.display(""))
+
         # MAC Address
         # macaddr = self.general_data["mac_address"]
-        macaddr_name = ctk.CTkLabel(frame_pc, text="MAC Address", anchor="w")
-        macaddr_name.grid(column=0, row=4, sticky="nesw", padx=(LP, 0), pady=(0, 5))
-        macaddr_name.configure(font=self.poppins_200)
+        mac_name = ctk.CTkLabel(frame_pc, text="MAC Address", anchor="w")
+        mac_name.grid(column=0, row=4, sticky="nesw", padx=(LP, 0), pady=(0, 5))
+        mac_name.configure(font=self.poppins_200)
 
-        macaddr_value = ctk.CTkLabel(frame_pc, text="B4:34:C3:E8", anchor="w")
-        macaddr_value.grid(column=1, row=4, sticky="nesw", padx=(0, 10), pady=(0, 5))
-        macaddr_value.configure(font=self.poppins_300)
+        mac_value = ctk.CTkLabel(frame_pc, text="B4:34:C3:E8", anchor="w")
+        mac_value.grid(column=1, row=4, sticky="nesw", padx=(0, 10), pady=(0, 5))
+        mac_value.configure(font=self.poppins_300)
+
+        mac_name.bind("<Enter>", lambda event: hover.display(tooltips["mac_address"]))
+        mac_name.bind("<Leave>", lambda event: hover.display(""))
 
         # ------------------------------------------------------------------------
         # -------------------------------- Router --------------------------------
@@ -109,6 +119,9 @@ class GeneralFrame(ctk.CTkFrame):
         r_ipv4_value.grid(column=1, row=1, sticky="nesw", padx=(0, 10), pady=(0, 5))
         r_ipv4_value.configure(font=self.poppins_300)
 
+        r_ipv4_name.bind("<Enter>", lambda event: hover.display(tooltips["r_ipv4"]))
+        r_ipv4_name.bind("<Leave>", lambda event: hover.display(""))
+
         # Router - IPv6
         # r_ipv6 = self.general_data["router_ipv6"]
         r_ipv6_name = ctk.CTkLabel(frame_router, text="IPv6", anchor="w")
@@ -118,6 +131,9 @@ class GeneralFrame(ctk.CTkFrame):
         r_ipv6_value = ctk.CTkLabel(frame_router, text="fe:800", anchor="w")
         r_ipv6_value.grid(column=1, row=2, sticky="nesw", padx=(0, 10), pady=(0, 5))
         r_ipv6_value.configure(font=self.poppins_300)
+
+        r_ipv6_name.bind("<Enter>", lambda event: hover.display(tooltips["r_ipv6"]))
+        r_ipv6_name.bind("<Leave>", lambda event: hover.display(""))
 
         # Dummy
         dummy_1 = ctk.CTkLabel(frame_router, text="")
@@ -148,6 +164,9 @@ class GeneralFrame(ctk.CTkFrame):
         p_ipv4_value = ctk.CTkLabel(frame_public, text="112.119.24.31", anchor="w")
         p_ipv4_value.grid(column=1, row=1, sticky="nesw", padx=(0, 10), pady=(0, 5))
         p_ipv4_value.configure(font=self.poppins_300)
+
+        p_ipv4_name.bind("<Enter>", lambda event: hover.display(tooltips["pub_ipv4"]))
+        p_ipv4_name.bind("<Leave>", lambda event: hover.display(""))
 
         # Dummy
         dummy_1 = ctk.CTkLabel(frame_public, text="")
@@ -295,6 +314,9 @@ class GeneralFrame(ctk.CTkFrame):
         isp_value.grid(column=3, row=2, sticky="nesw", padx=(0, 10), pady=(0, 5))
         isp_value.configure(font=self.poppins_300)
 
+        isp_name.bind("<Enter>", lambda event: hover.display(tooltips["isp"]))
+        isp_name.bind("<Leave>", lambda event: hover.display(""))
+
         # org = self.geolocation_data.org
         org = "-"
         org_name = ctk.CTkLabel(frame_geoip, text="Organization", anchor="w")
@@ -315,6 +337,9 @@ class GeneralFrame(ctk.CTkFrame):
         asn_value.grid(column=3, row=4, sticky="nesw", padx=(0, 10), pady=(0, 5))
         asn_value.configure(font=self.poppins_300)
 
+        asn_name.bind("<Enter>", lambda event: hover.display(tooltips["asn"]))
+        asn_name.bind("<Leave>", lambda event: hover.display(""))
+
         # asname = self.geolocation_data.as_name
         asname = "SLT"
         asname_name = ctk.CTkLabel(frame_geoip, text="AS Name", anchor="w")
@@ -324,3 +349,6 @@ class GeneralFrame(ctk.CTkFrame):
         asname_value = ctk.CTkLabel(frame_geoip, text=asname, anchor="w")
         asname_value.grid(column=3, row=5, sticky="nesw", padx=(0, 10), pady=(0, 5))
         asname_value.configure(font=self.poppins_300)
+
+        asname_name.bind("<Enter>", lambda event: hover.display(tooltips["as_name"]))
+        asname_name.bind("<Leave>", lambda event: hover.display(""))

@@ -1,18 +1,14 @@
 import customtkinter as ctk
 
 
-SIDEBAR_WIDTH = 0.15
-CURRENT_FRAME_HEIGHT = 0.95
-
-
 class CurrentFrame(ctk.CTkFrame):
-    def __init__(self, parent):
+    def __init__(self, parent, sidebar_width, current_frame_height):
         super().__init__(parent)
 
         self.configure(corner_radius=0, fg_color="#242424")
         self.place(
-            relx=SIDEBAR_WIDTH,
+            relx=sidebar_width,
             rely=0,
-            relwidth=(1 - SIDEBAR_WIDTH),
-            relheight=CURRENT_FRAME_HEIGHT,
+            relwidth=(1 - sidebar_width),
+            relheight=current_frame_height,
         )
