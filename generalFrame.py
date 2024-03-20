@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import socket
+import getGeneralData
 
 TEXT_CLR_700 = "#2586D0"
 LP = 15  # PadX - Left
@@ -8,6 +9,8 @@ LP = 15  # PadX - Left
 class GeneralFrame(ctk.CTkFrame):
     def __init__(self, parent, hover, tooltips):
         super().__init__(parent)
+
+        self.general_data = getGeneralData.GeneralData()
 
         self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
         self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
@@ -45,8 +48,7 @@ class GeneralFrame(ctk.CTkFrame):
         label_pc.grid(columnspan=2, rowspan=1, sticky="nesw", padx=(LP), pady=(10))
 
         # Hostname
-        # hostname = self.general_data["hostname"]
-        hostname = socket.gethostname()
+        hostname = self.general_data.hostname
         hostname_name = ctk.CTkLabel(frame_pc, text="Hostname", anchor="w")
         hostname_name.configure(font=self.poppins_200)
         hostname_name.grid(column=0, row=1, sticky="nesw", padx=(LP, 0), pady=(0, 5))
@@ -59,12 +61,12 @@ class GeneralFrame(ctk.CTkFrame):
         hostname_name.bind("<Leave>", lambda event: hover.display(""))
 
         # IPv4
-        # ipv4 = self.general_data["ipaddress_v4"]
+        ipv4 = self.general_data.ipv4_address
         ipv4_name = ctk.CTkLabel(frame_pc, text="IPv4", anchor="w")
         ipv4_name.grid(column=0, row=2, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         ipv4_name.configure(font=self.poppins_200)
 
-        ipv4_value = ctk.CTkLabel(frame_pc, text="192.168.1.50", anchor="w")
+        ipv4_value = ctk.CTkLabel(frame_pc, text=ipv4, anchor="w")
         ipv4_value.grid(column=1, row=2, sticky="nesw", padx=(0, 10), pady=(0, 5))
         ipv4_value.configure(font=self.poppins_300)
 
@@ -72,12 +74,12 @@ class GeneralFrame(ctk.CTkFrame):
         ipv4_name.bind("<Leave>", lambda event: hover.display(""))
 
         # IPv6
-        # ipv6 = self.general_data["ipaddress_v6"]
+        ipv6 = self.general_data.ipv6_address
         ipv6_name = ctk.CTkLabel(frame_pc, text="IPv6", anchor="w")
         ipv6_name.grid(column=0, row=3, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         ipv6_name.configure(font=self.poppins_200)
 
-        ipv6_value = ctk.CTkLabel(frame_pc, text="fe80", anchor="w")
+        ipv6_value = ctk.CTkLabel(frame_pc, text=ipv6, anchor="w")
         ipv6_value.grid(column=1, row=3, sticky="nesw", padx=(0, 10), pady=(0, 5))
         ipv6_value.configure(font=self.poppins_300)
 
@@ -85,12 +87,12 @@ class GeneralFrame(ctk.CTkFrame):
         ipv6_name.bind("<Leave>", lambda event: hover.display(""))
 
         # MAC Address
-        # macaddr = self.general_data["mac_address"]
+        macaddr = self.general_data.mac_address
         mac_name = ctk.CTkLabel(frame_pc, text="MAC Address", anchor="w")
         mac_name.grid(column=0, row=4, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         mac_name.configure(font=self.poppins_200)
 
-        mac_value = ctk.CTkLabel(frame_pc, text="B4:34:C3:E8", anchor="w")
+        mac_value = ctk.CTkLabel(frame_pc, text=macaddr, anchor="w")
         mac_value.grid(column=1, row=4, sticky="nesw", padx=(0, 10), pady=(0, 5))
         mac_value.configure(font=self.poppins_300)
 

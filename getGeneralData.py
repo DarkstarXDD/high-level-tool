@@ -1,25 +1,64 @@
-import subprocess
-import re
-
-
-"""
-If you just use the 'subprocess.run("ipconfig /all")', this will print out the
-commands result to the terminal.
-Instead of printing it to the terminal, We want to capture that result.
-So we use 'stdout=subprocess.PIPE' as an argument. This allows us to capture the result.
-
-'text=True' tells to decode the output of the command to a string using the default text encoding. 
-This makes it easier to work with the output as a string.
-"""
+import psutil
+import socket
 
 
 class GeneralData:
+    def __init__(self):
 
-    # ipv4_pattern = re.compile("^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$")
+        self.hostname = socket.gethostname()
 
-    general_data = subprocess.run("ipconfig /all", stdout=subprocess.PIPE, text=True)
-    general_data = general_data.stdout
-    print(general_data)
+        if self.get_data():
+            self.ipv4_address = self.get_data()["ipv4_address"]
+            self.ipv6_address = self.get_data()["ipv6_address"]
+            self.mac_address = self.get_data()["mac_address"]
+
+        else:
+            self.ipv4_address = "-"
+            self.ipv6_address = "-"
+            self.mac_address = "-"
+
+        # print(f"IPv4 Address: {self.ipv4_address}")
+        # print(f"IPv6 Address: {self.ipv6_address}")
+        # print(f"MAC Address: {self.mac_address}")
+
+    def get_data(self):
+        interfaces = psutil.net_if_addrs()
+
+        for interface, addresses in interfaces.items():
+
+            # Check whether the interface is NOT a loopback interface
+            not_loopback = interface != "Loopback Pseudo-Interface 1"
+
+            # Check whether the interface is up and running
+            is_up = psutil.net_if_stats()[interface].isup
+
+            if not_loopback and is_up:
+                ipv4_address = None
+                ipv6_address = None
+                mac_address = None
+
+                # Loop over all the addresses (not loopback & up and running) in the interface
+                for address in addresses:
+                    if (
+                        address.family == socket.AF_INET
+                        and not address.address.startswith("169.254")
+                    ):
+                        ipv4_address = address.address
+
+                    elif address.family == socket.AF_INET6:
+                        ipv6_address = address.address
+
+                    elif address.family == psutil.AF_LINK:
+                        mac_address = address.address
+
+                if ipv4_address or ipv6_address or mac_address:
+                    return {
+                        "ipv4_address": ipv4_address,
+                        "ipv6_address": ipv6_address,
+                        "mac_address": mac_address,
+                    }
+
+        return None
 
 
 GeneralData()
