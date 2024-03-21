@@ -1,6 +1,6 @@
 import customtkinter as ctk
-import socket
 import getGeneralData
+import getGeoLocationData
 
 TEXT_CLR_700 = "#2586D0"
 LP = 15  # PadX - Left
@@ -11,6 +11,7 @@ class GeneralFrame(ctk.CTkFrame):
         super().__init__(parent)
 
         self.general_data = getGeneralData.GeneralData()
+        self.geolocation_data = getGeoLocationData.GeoLocationData()
 
         self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
         self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
@@ -159,12 +160,12 @@ class GeneralFrame(ctk.CTkFrame):
         label_public.grid(columnspan=2, rowspan=1, sticky="nesw", padx=(LP), pady=(10))
 
         # Public IPv4
-        # p_ipv4 = self.geolocation_data.public_ip
+        p_ipv4 = self.geolocation_data.public_ip
         p_ipv4_name = ctk.CTkLabel(frame_public, text="Your Public IPv4", anchor="w")
         p_ipv4_name.grid(column=0, row=1, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         p_ipv4_name.configure(font=self.poppins_200)
 
-        p_ipv4_value = ctk.CTkLabel(frame_public, text="112.119.24.31", anchor="w")
+        p_ipv4_value = ctk.CTkLabel(frame_public, text=p_ipv4, anchor="w")
         p_ipv4_value.grid(column=1, row=1, sticky="nesw", padx=(0, 10), pady=(0, 5))
         p_ipv4_value.configure(font=self.poppins_300)
 
@@ -198,10 +199,8 @@ class GeneralFrame(ctk.CTkFrame):
         label_geoip.grid(columnspan=2, rowspan=1, sticky="nesw", padx=(LP), pady=(10))
 
         # Continent & Continent Code
-        # continent = self.geolocation_data.continent
-        continent = "Asia"
-        # continent_code = self.geolocation_data.continent_code
-        continent_code = "AS"
+        continent = self.geolocation_data.continent
+        continent_code = self.geolocation_data.continent_code
         continent_name = ctk.CTkLabel(frame_geoip, text="Continent", anchor="w")
         continent_name.grid(column=0, row=2, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         continent_name.configure(font=self.poppins_200)
@@ -213,10 +212,8 @@ class GeneralFrame(ctk.CTkFrame):
         continent_value.grid(column=1, row=2, sticky="nesw", padx=(0, 10), pady=(0, 5))
         continent_value.configure(font=self.poppins_300)
 
-        # country = self.geolocation_data.country
-        country = "Sri Lanka"
-        # country_code = self.geolocation_data.country_code
-        country_code = "LK"
+        country = self.geolocation_data.country
+        country_code = self.geolocation_data.country_code
         country_name = ctk.CTkLabel(frame_geoip, text="Country", anchor="w")
         country_name.grid(column=0, row=3, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         country_name.configure(font=self.poppins_200)
@@ -227,8 +224,7 @@ class GeneralFrame(ctk.CTkFrame):
         country_value.grid(column=1, row=3, sticky="nesw", padx=(0, 10), pady=(0, 5))
         country_value.configure(font=self.poppins_300)
 
-        # region = self.geolocation_data.region_name
-        region = "Western Province"
+        region = self.geolocation_data.region_name
         region_name = ctk.CTkLabel(frame_geoip, text="Region", anchor="w")
         region_name.grid(column=0, row=4, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         region_name.configure(font=self.poppins_200)
@@ -237,8 +233,7 @@ class GeneralFrame(ctk.CTkFrame):
         region_value.grid(column=1, row=4, sticky="nesw", padx=(0, 10), pady=(0, 5))
         region_value.configure(font=self.poppins_300)
 
-        # city = self.geolocation_data.city
-        city = "Battaramulla South"
+        city = self.geolocation_data.city
         city_name = ctk.CTkLabel(frame_geoip, text="City", anchor="w")
         city_name.grid(column=0, row=5, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         city_name.configure(font=self.poppins_200)
@@ -247,8 +242,7 @@ class GeneralFrame(ctk.CTkFrame):
         city_value.grid(column=1, row=5, sticky="nesw", padx=(0, 10), pady=(0, 5))
         city_value.configure(font=self.poppins_300)
 
-        # district = self.geolocation_data.district
-        district = "-"
+        district = self.geolocation_data.district
         district_name = ctk.CTkLabel(frame_geoip, text="District", anchor="w")
         district_name.grid(column=0, row=6, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         district_name.configure(font=self.poppins_200)
@@ -257,8 +251,7 @@ class GeneralFrame(ctk.CTkFrame):
         district_value.grid(column=1, row=6, sticky="nesw", padx=(0, 10), pady=(0, 5))
         district_value.configure(font=self.poppins_300)
 
-        # zipcode = self.geolocation_data.zipcode
-        zipcode = "10120"
+        zipcode = self.geolocation_data.zipcode
         zip_name = ctk.CTkLabel(frame_geoip, text="Zip", anchor="w")
         zip_name.grid(column=0, row=7, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         zip_name.configure(font=self.poppins_200)
@@ -267,8 +260,7 @@ class GeneralFrame(ctk.CTkFrame):
         zip_value.grid(column=1, row=7, sticky="nesw", padx=(0, 10), pady=(0, 5))
         zip_value.configure(font=self.poppins_300)
 
-        # lat = self.geolocation_data.lat
-        lat = "80.6554"
+        lat = self.geolocation_data.lat
         lat_name = ctk.CTkLabel(frame_geoip, text="Latitude", anchor="w")
         lat_name.grid(column=0, row=8, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         lat_name.configure(font=self.poppins_200)
@@ -277,8 +269,7 @@ class GeneralFrame(ctk.CTkFrame):
         lat_value.grid(column=1, row=8, sticky="nesw", padx=(0, 10), pady=(0, 5))
         lat_value.configure(font=self.poppins_300)
 
-        # lon = self.geolocation_data.lon
-        lon = "6.98"
+        lon = self.geolocation_data.lon
         lon_name = ctk.CTkLabel(frame_geoip, text="Longitude", anchor="w")
         lon_name.grid(column=0, row=9, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         lon_name.configure(font=self.poppins_200)
@@ -287,8 +278,7 @@ class GeneralFrame(ctk.CTkFrame):
         lon_value.grid(column=1, row=9, sticky="nesw", padx=(0, 10), pady=(0, 5))
         lon_value.configure(font=self.poppins_300)
 
-        # timezone = self.geolocation_data.timezone
-        timezone = "Asia/AS"
+        timezone = self.geolocation_data.timezone
         timezone_name = ctk.CTkLabel(frame_geoip, text="Timezone", anchor="w")
         timezone_name.grid(column=0, row=10, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         timezone_name.configure(font=self.poppins_200)
@@ -297,8 +287,7 @@ class GeneralFrame(ctk.CTkFrame):
         timezone_value.grid(column=1, row=10, sticky="nesw", padx=(0, 10), pady=(0, 5))
         timezone_value.configure(font=self.poppins_300)
 
-        # currency = self.geolocation_data.currency
-        currency = "LK"
+        currency = self.geolocation_data.currency
         currency_name = ctk.CTkLabel(frame_geoip, text="Currency", anchor="w")
         currency_name.grid(column=0, row=11, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         currency_name.configure(font=self.poppins_200)
@@ -307,8 +296,7 @@ class GeneralFrame(ctk.CTkFrame):
         currency_value.grid(column=1, row=11, sticky="nesw", padx=(0, 10), pady=(0, 5))
         currency_value.configure(font=self.poppins_300)
 
-        # isp = self.geolocation_data.isp
-        isp = "SLT - Sri Lanka Telecom"
+        isp = self.geolocation_data.isp
         isp_name = ctk.CTkLabel(frame_geoip, text="ISP", anchor="w")
         isp_name.grid(column=2, row=2, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         isp_name.configure(font=self.poppins_200)
@@ -320,8 +308,7 @@ class GeneralFrame(ctk.CTkFrame):
         isp_name.bind("<Enter>", lambda event: hover.display(tooltips["isp"]))
         isp_name.bind("<Leave>", lambda event: hover.display(""))
 
-        # org = self.geolocation_data.org
-        org = "-"
+        org = self.geolocation_data.org
         org_name = ctk.CTkLabel(frame_geoip, text="Organization", anchor="w")
         org_name.grid(column=2, row=3, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         org_name.configure(font=self.poppins_200)
@@ -330,8 +317,7 @@ class GeneralFrame(ctk.CTkFrame):
         org_value.grid(column=3, row=3, sticky="nesw", padx=(0, 10), pady=(0, 5))
         org_value.configure(font=self.poppins_300)
 
-        # asn = self.geolocation_data.asn
-        asn = "SLT123"
+        asn = self.geolocation_data.asn
         asn_name = ctk.CTkLabel(frame_geoip, text="ASN", anchor="w")
         asn_name.grid(column=2, row=4, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         asn_name.configure(font=self.poppins_200)
@@ -343,8 +329,7 @@ class GeneralFrame(ctk.CTkFrame):
         asn_name.bind("<Enter>", lambda event: hover.display(tooltips["asn"]))
         asn_name.bind("<Leave>", lambda event: hover.display(""))
 
-        # asname = self.geolocation_data.as_name
-        asname = "SLT"
+        asname = self.geolocation_data.as_name
         asname_name = ctk.CTkLabel(frame_geoip, text="AS Name", anchor="w")
         asname_name.grid(column=2, row=5, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         asname_name.configure(font=self.poppins_200)
