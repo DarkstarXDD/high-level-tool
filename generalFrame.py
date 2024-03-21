@@ -19,7 +19,8 @@ class GeneralFrame(ctk.CTkFrame):
         self.configure(corner_radius=0, fg_color="#242424")
         self.place(relx=0, rely=0, relwidth=1, relheight=1)
 
-        self.columnconfigure((0, 1, 2), weight=1, uniform="a")
+        self.columnconfigure(0, weight=4, uniform="a")
+        self.columnconfigure((1, 2), weight=3, uniform="a")
         self.rowconfigure(0, weight=1, uniform="a")
         self.rowconfigure(1, weight=2, uniform="a")
 

@@ -46,7 +46,9 @@ class GeneralData:
                         ipv4_address = address.address
 
                     elif address.family == socket.AF_INET6:
-                        ipv6_address = address.address
+
+                        if not ipv6_address and not address.address.startswith("fe80"):
+                            ipv6_address = address.address
 
                     elif address.family == psutil.AF_LINK:
                         mac_address = address.address
