@@ -85,7 +85,11 @@ class PortScannerFrame(ctk.CTkFrame):
         # ----------------------- Buttons - Create & Place  ----------------------
         # ------------------------------------------------------------------------
         self.button_reset = ctk.CTkButton(frame_top)
-        self.button_reset.configure(text="Reset", font=self.poppins_400)
+        self.button_reset.configure(
+            text="Reset",
+            font=self.poppins_400,
+            command=self.handle_reset,
+        )
 
         self.button_start = ctk.CTkButton(frame_top)
         self.button_start.configure(
@@ -130,6 +134,7 @@ class PortScannerFrame(ctk.CTkFrame):
     def run_port_scan(self):
         self.running = True
         self.button_start.configure(state="disabled")
+        self.button_reset.configure(state="disabled")
         self.button_cancel.configure(state="normal")
         target_ip = self.input_target.get()
         starting_port = self.input_start.get()
@@ -151,6 +156,7 @@ class PortScannerFrame(ctk.CTkFrame):
 
         self.button_start.configure(state="normal")
         self.button_cancel.configure(state="disabled")
+        self.button_reset.configure(state="normal")
 
     # ------------------------------------------------------------------------
     # ------ Run the port scan in a new thread. So the GUI won't freeze ------
@@ -163,6 +169,18 @@ class PortScannerFrame(ctk.CTkFrame):
 
     def stop_flag(self):
         return not self.running
+
+    def handle_reset(self):
+        self.main_output.delete("1.0", "end")
+
+        self.input_target.delete(0, "end")
+        self.input_target.insert(0, "192.168.1.1")
+
+        self.input_start.delete(0, "end")
+        self.input_start.insert(0, "1")
+
+        self.input_end.delete(0, "end")
+        self.input_end.insert(0, "1024")
 
 
 class PortScan:
