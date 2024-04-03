@@ -51,7 +51,9 @@ class RunApp:
         portscan_frame = portScannerFrame.PortScannerFrame(
             current_frame, hover_area, tooltips, descriptions
         )
-        ping_frame = pingFrame.PingFrame(current_frame)
+        ping_frame = pingFrame.PingFrame(
+            current_frame, hover_area, tooltips, descriptions
+        )
         traceroute_frame = tracerouteFrame.TracerouteFrame(current_frame)
         macaddr_frame = macAddressFrame.MacAddressFrame(current_frame)
 
