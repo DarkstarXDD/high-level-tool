@@ -8,5 +8,9 @@
   "pub_ipv4": "Address used to identify your router/gateway device on the internet. It's your network's public address in the online world.",
   "isp": "Internet Service Provider. The name of the company that provides your internet connection.",
   "asn": "A unique number assigned to an Autonomous System (AS), which is a collection of IP networks and routers under the control of one organization.",
-  "as_name": "Refers to the name associated with an ASN. It typically represents the organization or entity that owns or operates the autonomous system."
+  "as_name": "Refers to the name associated with an ASN. It typically represents the organization or entity that owns or operates the autonomous system.",
+
+  "ps_target": "IP Address or domain name of the device you want to scan. It's like the destination you want to explore.",
+  "ps_s_port": "Starting port for the scan. The scan will be done from this port to the end port.",
+  "ps_e_port": "Ending port for the scan. The scan will be done from the starting port to this port."
 }

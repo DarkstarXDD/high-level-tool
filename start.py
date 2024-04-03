@@ -28,21 +28,29 @@ class RunApp:
         window.title("High Level Tool")
         window.geometry("1400x650")
 
+        ctk.set_default_color_theme("blue")
+        ctk.set_default_color_theme("blue.json")
+
         sidebar_frame = sidebar.Sidebar(window, SIDEBAR_WIDTH)
         current_frame = currentFrame.CurrentFrame(
             window, SIDEBAR_WIDTH, CURRENT_FRAME_HEIGHT
         )
         hover_area = hoverArea.HoverArea(window, SIDEBAR_WIDTH, CURRENT_FRAME_HEIGHT)
 
-        with open(file="tooltips.json", mode="r") as file:
-            data = json.load(file)
+        with open(file="tooltips.json", mode="r") as tooltips_file:
+            tooltips = json.load(tooltips_file)
+
+        with open(file="descriptions.json", mode="r") as descriptions_file:
+            descriptions = json.load(descriptions_file)
 
         # Frames
-        general_frame = generalFrame.GeneralFrame(current_frame, hover_area, data)
+        general_frame = generalFrame.GeneralFrame(current_frame, hover_area, tooltips)
         network_frame = networkFrame.NetworkFrame(current_frame)
         wifi_frame = wifiFrame.WiFiFrame(current_frame)
         ipscan_frame = ipScannerFrame.IPScannerFrame(current_frame)
-        portscan_frame = portScannerFrame.PortScannerFrame(current_frame)
+        portscan_frame = portScannerFrame.PortScannerFrame(
+            current_frame, hover_area, tooltips, descriptions
+        )
         ping_frame = pingFrame.PingFrame(current_frame)
         traceroute_frame = tracerouteFrame.TracerouteFrame(current_frame)
         macaddr_frame = macAddressFrame.MacAddressFrame(current_frame)
