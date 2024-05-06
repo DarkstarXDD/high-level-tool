@@ -34,6 +34,7 @@ class PingFrame(ctk.CTkFrame):
         frame_middle.configure(fg_color="#242424")
 
         frame_bottom.grid(row=2, sticky="nesw", padx=10, pady=(5, 10))
+        frame_bottom.configure(fg_color="#242424")
 
         # ------------------------------------------------------------------------
         # ---------------------- Labels - Create & Place  ------------------------

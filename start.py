@@ -28,7 +28,7 @@ class RunApp:
         window.title("High Level Tool")
         window.geometry("1400x650")
 
-        ctk.set_default_color_theme("blue")
+        # ctk.set_default_color_theme("blue")
         ctk.set_default_color_theme("blue.json")
 
         sidebar_frame = sidebar.Sidebar(window, SIDEBAR_WIDTH)

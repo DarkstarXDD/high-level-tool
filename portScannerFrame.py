@@ -12,9 +12,10 @@ class PortScannerFrame(ctk.CTkFrame):
 
         self.running = False  # Flag for stopping scan mid execution
 
-        self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
-        self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
         self.poppins_200 = ctk.CTkFont(family="Poppins", size=14)
+        self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
+        self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
+
         self.cascadia_200 = ctk.CTkFont(family="Cascadia Mono", size=14)
 
         self.configure(corner_radius=0, fg_color="#242424")
@@ -37,6 +38,7 @@ class PortScannerFrame(ctk.CTkFrame):
         frame_middle.configure(fg_color="#242424")
 
         frame_bottom.grid(row=2, sticky="nesw", padx=10, pady=(5, 10))
+        frame_bottom.configure(fg_color="#242424")
 
         # ------------------------------------------------------------------------
         # ---------------------- Labels - Create & Place  ------------------------

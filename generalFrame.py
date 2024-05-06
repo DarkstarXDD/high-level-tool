@@ -13,9 +13,9 @@ class GeneralFrame(ctk.CTkFrame):
         self.general_data = getGeneralData.GeneralData()
         self.geolocation_data = getGeoLocationData.GeoLocationData()
 
-        self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
-        self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
         self.poppins_200 = ctk.CTkFont(family="Poppins", size=14)
+        self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
+        self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
 
         self.configure(corner_radius=0, fg_color="#242424")
         self.place(relx=0, rely=0, relwidth=1, relheight=1)
