@@ -15,5 +15,6 @@
   "ps_e_port": "Ending port for the scan. The scan will be done from the starting port to this port.",
 
   "ping_target": "IP address or domain name of the device you want to ping.",
-  "traceroute": "IP address or domain name of the destination your packet needs to reach"
+  "traceroute": "IP address or domain name of the destination your packet needs to reach.",
+  "macaddr_lookup": "MAC Address you want to search for."
 }

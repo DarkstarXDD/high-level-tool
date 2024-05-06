@@ -9,7 +9,7 @@ import ipScannerFrame
 import portScannerFrame
 import pingFrame
 import tracerouteFrame
-import macAddressFrame
+import macLookupFrame
 
 import getGeoLocationData
 
@@ -33,7 +33,7 @@ class RunApp:
         self.portscan_frame = portScannerFrame.PortScannerFrame(self.current_frame)
         self.ping_frame = pingFrame.PingFrame(self.current_frame)
         self.traceroute_frame = tracerouteFrame.TracerouteFrame(self.current_frame)
-        self.macaddr_frame = macAddressFrame.MacAddressFrame(self.current_frame)
+        self.macaddr_frame = macLookupFrame.MacAddressFrame(self.current_frame)
 
         self.general_frame.lift()
 

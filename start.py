@@ -9,9 +9,7 @@ import ipScannerFrame
 import portScannerFrame
 import pingFrame
 import tracerouteFrame
-import macAddressFrame
-
-import getGeoLocationData
+import macLookupFrame
 
 import customtkinter as ctk
 import json
@@ -57,7 +55,9 @@ class RunApp:
         traceroute_frame = tracerouteFrame.TracerouteFrame(
             current_frame, hover_area, tooltips, descriptions
         )
-        macaddr_frame = macAddressFrame.MacAddressFrame(current_frame)
+        mac_lookup_frame = macLookupFrame.MacLookupFrame(
+            current_frame, hover_area, tooltips, descriptions
+        )
 
         general_frame.lift()
 
@@ -73,8 +73,8 @@ class RunApp:
         sb_button_traceroute = sb.SidebarButton(
             sidebar_frame, "Traceroute", traceroute_frame
         )
-        sb_button_macaddr = sb.SidebarButton(
-            sidebar_frame, "MAC Address Lookup", macaddr_frame
+        sb_button_mac_lookup = sb.SidebarButton(
+            sidebar_frame, "MAC Address Lookup", mac_lookup_frame
         )
 
         window.mainloop()
