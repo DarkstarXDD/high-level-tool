@@ -54,7 +54,9 @@ class RunApp:
         ping_frame = pingFrame.PingFrame(
             current_frame, hover_area, tooltips, descriptions
         )
-        traceroute_frame = tracerouteFrame.TracerouteFrame(current_frame)
+        traceroute_frame = tracerouteFrame.TracerouteFrame(
+            current_frame, hover_area, tooltips, descriptions
+        )
         macaddr_frame = macAddressFrame.MacAddressFrame(current_frame)
 
         general_frame.lift()

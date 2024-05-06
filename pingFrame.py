@@ -9,18 +9,19 @@ class PingFrame(ctk.CTkFrame):
 
         self.running = False
 
-        self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
         self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
         self.poppins_200 = ctk.CTkFont(family="Poppins", size=14)
+        self.poppins_400 = ctk.CTkFont(family="Poppins SemiBold", size=18)
+
         self.cascadia_200 = ctk.CTkFont(family="Cascadia Mono", size=14)
 
         self.configure(corner_radius=0, fg_color="#242424")
         self.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         self.columnconfigure(0, weight=1, uniform="a")
-        self.rowconfigure(0, weight=2, uniform="a")
-        self.rowconfigure(1, weight=3, uniform="a")
-        self.rowconfigure(2, weight=1, uniform="a")
+        self.rowconfigure(0, weight=4, uniform="a")
+        self.rowconfigure(1, weight=6, uniform="a")
+        self.rowconfigure(2, weight=3, uniform="a")
 
         # Create 3 Frames for the Sections
         frame_top = ctk.CTkFrame(self)
