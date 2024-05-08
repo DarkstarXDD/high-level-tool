@@ -13,6 +13,8 @@ import macLookupFrame
 
 import customtkinter as ctk
 import json
+import os
+import sys
 
 
 SIDEBAR_WIDTH = 0.15
@@ -26,8 +28,7 @@ class RunApp:
         window.title("High Level Tool")
         window.geometry("1400x650")
 
-        # ctk.set_default_color_theme("blue")
-        ctk.set_default_color_theme("blue.json")
+        ctk.set_default_color_theme(self.resource_path("./data/blue.json"))
 
         sidebar_frame = sidebar.Sidebar(window, SIDEBAR_WIDTH)
         current_frame = currentFrame.CurrentFrame(
@@ -35,10 +36,14 @@ class RunApp:
         )
         hover_area = hoverArea.HoverArea(window, SIDEBAR_WIDTH, CURRENT_FRAME_HEIGHT)
 
-        with open(file="tooltips.json", mode="r") as tooltips_file:
+        with open(
+            file=self.resource_path("./data/tooltips.json"), mode="r"
+        ) as tooltips_file:
             tooltips = json.load(tooltips_file)
 
-        with open(file="descriptions.json", mode="r") as descriptions_file:
+        with open(
+            file=self.resource_path("./data/descriptions.json"), mode="r"
+        ) as descriptions_file:
             descriptions = json.load(descriptions_file)
 
         # Frames
@@ -78,6 +83,14 @@ class RunApp:
         )
 
         window.mainloop()
+
+    def resource_path(self, relative_path):
+        try:
+            base_path = sys._MEIPASS2
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
 
 
 runapp = RunApp()
