@@ -5,7 +5,7 @@ import hoverArea
 import generalFrame
 import networkFrame
 import wifiFrame
-import ipScannerFrame
+import pingSweepFrame
 import portScannerFrame
 import pingFrame
 import tracerouteFrame
@@ -50,7 +50,9 @@ class RunApp:
         general_frame = generalFrame.GeneralFrame(current_frame, hover_area, tooltips)
         network_frame = networkFrame.NetworkFrame(current_frame)
         wifi_frame = wifiFrame.WiFiFrame(current_frame)
-        ipscan_frame = ipScannerFrame.IPScannerFrame(current_frame)
+        pingsweep_frame = pingSweepFrame.PingSweepFrame(
+            current_frame, hover_area, tooltips, descriptions
+        )
         portscan_frame = portScannerFrame.PortScannerFrame(
             current_frame, hover_area, tooltips, descriptions
         )
@@ -72,7 +74,7 @@ class RunApp:
             sidebar_frame, "Network Interfaces", network_frame
         )
         sb_button_wifi = sb.SidebarButton(sidebar_frame, "WiFi", wifi_frame)
-        sb_button_ip = sb.SidebarButton(sidebar_frame, "IP Scanner", ipscan_frame)
+        sb_button_ip = sb.SidebarButton(sidebar_frame, "Ping Sweep", pingsweep_frame)
         sb_button_port = sb.SidebarButton(sidebar_frame, "Port Scanner", portscan_frame)
         sb_button_ping = sb.SidebarButton(sidebar_frame, "Ping", ping_frame)
         sb_button_traceroute = sb.SidebarButton(
