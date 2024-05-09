@@ -1,3 +1,9 @@
+import os
+import sys
+import json
+
+import customtkinter as ctk
+
 import sidebar
 import sidebarButton as sb
 import currentFrame
@@ -10,11 +16,6 @@ import portScannerFrame
 import pingFrame
 import tracerouteFrame
 import macLookupFrame
-
-import customtkinter as ctk
-import json
-import os
-import sys
 
 
 SIDEBAR_WIDTH = 0.15
@@ -37,12 +38,16 @@ class RunApp:
         hover_area = hoverArea.HoverArea(window, SIDEBAR_WIDTH, CURRENT_FRAME_HEIGHT)
 
         with open(
-            file=self.resource_path("./data/tooltips.json"), mode="r"
+            file=self.resource_path("./data/tooltips.json"),
+            encoding="utf-8",
+            mode="r",
         ) as tooltips_file:
             tooltips = json.load(tooltips_file)
 
         with open(
-            file=self.resource_path("./data/descriptions.json"), mode="r"
+            file=self.resource_path("./data/descriptions.json"),
+            encoding="utf-8",
+            mode="r",
         ) as descriptions_file:
             descriptions = json.load(descriptions_file)
 
@@ -69,20 +74,14 @@ class RunApp:
         general_frame.lift()
 
         # Sidebar Buttons
-        sb_button_general = sb.SidebarButton(sidebar_frame, "General", general_frame)
-        sb_button_netint = sb.SidebarButton(
-            sidebar_frame, "Network Interfaces", network_frame
-        )
-        sb_button_wifi = sb.SidebarButton(sidebar_frame, "WiFi", wifi_frame)
-        sb_button_ip = sb.SidebarButton(sidebar_frame, "Ping Sweep", pingsweep_frame)
-        sb_button_port = sb.SidebarButton(sidebar_frame, "Port Scanner", portscan_frame)
-        sb_button_ping = sb.SidebarButton(sidebar_frame, "Ping", ping_frame)
-        sb_button_traceroute = sb.SidebarButton(
-            sidebar_frame, "Traceroute", traceroute_frame
-        )
-        sb_button_mac_lookup = sb.SidebarButton(
-            sidebar_frame, "MAC Address Lookup", mac_lookup_frame
-        )
+        sb.SidebarButton(sidebar_frame, "General", general_frame)
+        sb.SidebarButton(sidebar_frame, "Network Interfaces", network_frame)
+        sb.SidebarButton(sidebar_frame, "WiFi", wifi_frame)
+        sb.SidebarButton(sidebar_frame, "Ping Sweep", pingsweep_frame)
+        sb.SidebarButton(sidebar_frame, "Port Scanner", portscan_frame)
+        sb.SidebarButton(sidebar_frame, "Ping", ping_frame)
+        sb.SidebarButton(sidebar_frame, "Traceroute", traceroute_frame)
+        sb.SidebarButton(sidebar_frame, "MAC Address Lookup", mac_lookup_frame)
 
         window.mainloop()
 
