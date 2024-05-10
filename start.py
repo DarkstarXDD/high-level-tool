@@ -14,10 +14,9 @@ import networkFrame
 from frames import usagemonitor
 from frames import pingsweep
 from frames import portscan
-
-import pingFrame
-import tracerouteFrame
-import macLookupFrame
+from frames import ping
+from frames import traceroute
+from frames import maclookup
 
 
 SIDEBAR_WIDTH = 0.15
@@ -65,13 +64,11 @@ class RunApp:
         portscan_frame = portscan.PortScannerFrame(
             current_frame, hover_area, tooltips, descriptions
         )
-        ping_frame = pingFrame.PingFrame(
+        ping_frame = ping.PingFrame(current_frame, hover_area, tooltips, descriptions)
+        traceroute_frame = traceroute.TracerouteFrame(
             current_frame, hover_area, tooltips, descriptions
         )
-        traceroute_frame = tracerouteFrame.TracerouteFrame(
-            current_frame, hover_area, tooltips, descriptions
-        )
-        mac_lookup_frame = macLookupFrame.MacLookupFrame(
+        mac_lookup_frame = maclookup.MacLookupFrame(
             current_frame, hover_area, tooltips, descriptions
         )
 
