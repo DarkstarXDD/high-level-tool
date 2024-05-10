@@ -10,6 +10,10 @@
   "asn": "A unique number assigned to an Autonomous System (AS), which is a collection of IP networks and routers under the control of one organization.",
   "as_name": "Refers to the name associated with an ASN. It typically represents the organization or entity that owns or operates the autonomous system.",
 
+  "usage_total": "Amount of data in MegaBytes that has been sent and received from the system.",
+  "usage_upload": "Amount of data in MegaBytes that has been sent from the system.",
+  "usage_download": "Amount of data in MegaBytes that has been received from the system.",
+
   "pingsweep": "IP Address range should be in the given format. Ex: 192.168.1.0/24",
   "ps_target": "IP Address or domain name of the device you want to scan. It's like the destination you want to explore.",
   "ps_s_port": "Starting port for the scan. The scan will be done from this port to the end port.",
