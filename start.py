@@ -8,11 +8,13 @@ import sidebar
 import sidebarButton as sb
 import currentFrame
 import hoverArea
+
 import generalFrame
 import networkFrame
-import usageMonitorFrame
-import pingSweepFrame
-import portScannerFrame
+from frames import usagemonitor
+from frames import pingsweep
+from frames import portscan
+
 import pingFrame
 import tracerouteFrame
 import macLookupFrame
@@ -54,13 +56,13 @@ class RunApp:
         # Frames
         general_frame = generalFrame.GeneralFrame(current_frame, hover_area, tooltips)
         network_frame = networkFrame.NetworkFrame(current_frame)
-        usage_frame = usageMonitorFrame.UsageMonitorFrame(
+        usage_frame = usagemonitor.UsageMonitorFrame(
             current_frame, hover_area, tooltips
         )
-        pingsweep_frame = pingSweepFrame.PingSweepFrame(
+        pingsweep_frame = pingsweep.PingSweepFrame(
             current_frame, hover_area, tooltips, descriptions
         )
-        portscan_frame = portScannerFrame.PortScannerFrame(
+        portscan_frame = portscan.PortScannerFrame(
             current_frame, hover_area, tooltips, descriptions
         )
         ping_frame = pingFrame.PingFrame(

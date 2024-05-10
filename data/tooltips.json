@@ -15,9 +15,9 @@
   "usage_download": "Amount of data in MegaBytes that has been received from the system.",
 
   "pingsweep": "IP Address range should be in the given format. Ex: 192.168.1.0/24",
-  "ps_target": "IP Address or domain name of the device you want to scan. It's like the destination you want to explore.",
-  "ps_s_port": "Starting port for the scan. The scan will be done from this port to the end port.",
-  "ps_e_port": "Ending port for the scan. The scan will be done from the starting port to this port.",
+  "port_target": "IP Address or domain name of the device you want to scan. It's like the destination you want to explore.",
+  "port_start": "Starting port for the scan. The scan will be done from this port to the end port.",
+  "port_end": "Ending port for the scan. The scan will be done from the starting port to this port.",
 
   "ping_target": "IP address or domain name of the device you want to ping.",
   "traceroute": "IP address or domain name of the destination your packet needs to reach.",

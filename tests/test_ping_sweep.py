@@ -25,14 +25,20 @@ arp_result = scapy.arping(ip_add_range_entered, verbose=False)
 arp_table = []
 for sent, received in arp_result[0]:
     arp_table.append([received.psrc, received.hwsrc])
+    # print(sent)
+    print(received.psrc)
+    print(received.hwsrc)
 
 arp_table_sorted = sorted(arp_table, key=lambda x: x[0])
 
 # Display the ARP result in a table format
-print(
-    tabulate(
-        arp_table_sorted,
-        headers=["IP Address", "MAC Address"],
-        tablefmt="grid",
-    )
-)
+# print(
+#     tabulate(
+#         arp_table_sorted,
+#         headers=["IP Address", "MAC Address"],
+#         tablefmt="grid",
+#     )
+# )
+
+# print(arp_result)
+# print(arp_result[0])
