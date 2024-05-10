@@ -10,7 +10,7 @@ import currentFrame
 import hoverArea
 import generalFrame
 import networkFrame
-import wifiFrame
+import usageMonitorFrame
 import pingSweepFrame
 import portScannerFrame
 import pingFrame
@@ -54,7 +54,9 @@ class RunApp:
         # Frames
         general_frame = generalFrame.GeneralFrame(current_frame, hover_area, tooltips)
         network_frame = networkFrame.NetworkFrame(current_frame)
-        wifi_frame = wifiFrame.WiFiFrame(current_frame)
+        usage_frame = usageMonitorFrame.UsageMonitorFrame(
+            current_frame, hover_area, tooltips
+        )
         pingsweep_frame = pingSweepFrame.PingSweepFrame(
             current_frame, hover_area, tooltips, descriptions
         )
@@ -76,7 +78,7 @@ class RunApp:
         # Sidebar Buttons
         sb.SidebarButton(sidebar_frame, "General", general_frame)
         sb.SidebarButton(sidebar_frame, "Network Interfaces", network_frame)
-        sb.SidebarButton(sidebar_frame, "WiFi", wifi_frame)
+        sb.SidebarButton(sidebar_frame, "Data Usage Monitor", usage_frame)
         sb.SidebarButton(sidebar_frame, "Ping Sweep", pingsweep_frame)
         sb.SidebarButton(sidebar_frame, "Port Scanner", portscan_frame)
         sb.SidebarButton(sidebar_frame, "Ping", ping_frame)
