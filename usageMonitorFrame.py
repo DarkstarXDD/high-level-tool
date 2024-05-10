@@ -35,14 +35,13 @@ class UsageMonitorFrame(ctk.CTkFrame):
 
         # Create 3 Frames for the Sections
         frame_top = ctk.CTkFrame(self)
-        frame_middle = ctk.CTkFrame(self)
+        self.frame_middle = ctk.CTkFrame(self)
         frame_bottom = ctk.CTkFrame(self)
 
         # Place the 3 Frames (Sections)
         frame_top.grid(row=0, sticky="nesw", padx=10, pady=(10, 5))
 
-        frame_middle.grid(row=1, sticky="nesw", padx=10, pady=5)
-        # frame_middle.configure(fg_color="#242424")
+        self.frame_middle.grid(row=1, sticky="nesw", padx=10, pady=5)
 
         frame_bottom.grid(row=2, sticky="nesw", padx=10, pady=(5, 10))
         frame_bottom.configure(fg_color="#242424")
@@ -79,35 +78,34 @@ class UsageMonitorFrame(ctk.CTkFrame):
         # ------------------------------------------------------------------------
         # ----------------------- Labels for Total Data --------------------------
         # ------------------------------------------------------------------------
-        frame_middle.columnconfigure(0, weight=1, uniform="a")
-        frame_middle.columnconfigure(1, weight=1, uniform="a")
-        frame_middle.rowconfigure(0, weight=1, uniform="a")
-        frame_middle.rowconfigure(1, weight=1, uniform="a")
+        self.frame_middle.columnconfigure(0, weight=1, uniform="a")
+        self.frame_middle.columnconfigure(1, weight=1, uniform="a")
+        self.frame_middle.rowconfigure(0, weight=1, uniform="a")
+        self.frame_middle.rowconfigure(1, weight=1, uniform="a")
 
-        self.lbl_total = ctk.CTkLabel(
-            frame_middle,
-            text=f"Total: {self.total} MB",
-            anchor="w",
-        )
-        self.lbl_total.configure(font=self.poppins_400)
-
-        self.lbl_upload = ctk.CTkLabel(
-            frame_middle,
-            text=f"Total Upload: {self.total_upload} MB",
-            anchor="w",
-        )
-        self.lbl_upload.configure(font=self.poppins_400)
-
-        self.lbl_download = ctk.CTkLabel(
-            frame_middle,
-            text=f"Total Download: {self.total_download} MB",
-            anchor="w",
-        )
-        self.lbl_download.configure(font=self.poppins_400)
+        self.lbl_total = self.create_label("Total")
+        self.lbl_upload = self.create_label("Total Upload")
+        self.lbl_download = self.create_label("Total Download")
 
         self.lbl_total.grid(row=0, column=0, sticky="nesw", padx=80, pady=5)
         self.lbl_upload.grid(row=0, column=1, sticky="nesw", padx=40, pady=5)
         self.lbl_download.grid(row=1, column=1, sticky="nesw", padx=40, pady=5)
+
+    def create_label(self, label_text):
+        label = ctk.CTkLabel(
+            self.frame_middle,
+            text=f"{label_text}: 0.00 MB",
+            anchor="w",
+        )
+        label.configure(font=self.poppins_400)
+        return label
+
+    def update_labels(self):
+        self.lbl_total.configure(text=f"Total: {self.total:.2f} MB")
+        self.lbl_upload.configure(text=f"Total Upload: {self.total_upload:.2f} MB")
+        self.lbl_download.configure(
+            text=f"Total Download: {self.total_download:.2f} MB"
+        )
 
     def usage_monitor(self):
         self.button_start.configure(state="disabled")
@@ -115,18 +113,14 @@ class UsageMonitorFrame(ctk.CTkFrame):
         self.loop_running = True
 
         # 'psutil.net_io_counters()' returns values since last system restart.
-        last_received = psutil.net_io_counters().bytes_recv
-        last_sent = psutil.net_io_counters().bytes_sent
-        last_total = last_received + last_sent
+        last_counters = psutil.net_io_counters()
 
         while self.loop_running:
-            bytes_received = psutil.net_io_counters().bytes_recv
-            bytes_sent = psutil.net_io_counters().bytes_sent
-            bytes_total = bytes_received + bytes_sent
+            new_counters = psutil.net_io_counters()
 
-            new_received = bytes_received - last_received
-            new_sent = bytes_sent - last_sent
-            new_total = bytes_total - last_total
+            new_received = new_counters.bytes_recv - last_counters.bytes_recv
+            new_sent = new_counters.bytes_sent - last_counters.bytes_sent
+            new_total = new_received + new_sent
 
             # Bytes --> KB --> MB
             new_received_in_mb = new_received / 1024 / 1024
@@ -137,13 +131,8 @@ class UsageMonitorFrame(ctk.CTkFrame):
             self.total_download += new_received_in_mb
             self.total_upload += new_sent_in_mb
 
-            self.update_lbl_total()
-            self.update_lbl_upload()
-            self.update_lbl_download()
-
-            last_received = bytes_received
-            last_sent = bytes_sent
-            last_total = bytes_total
+            self.update_labels()
+            last_counters = new_counters
 
             time.sleep(1)
 
