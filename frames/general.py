@@ -47,7 +47,7 @@ class GeneralFrame(ctk.CTkFrame):
         # Logo & Section Heading
         label_pc = ctk.CTkLabel(frame_pc, text="This PC", anchor="w")
         label_pc.configure(font=self.poppins_400, text_color=TEXT_CLR_700)
-        label_pc.grid(columnspan=2, rowspan=1, sticky="nesw", padx=(LP), pady=(10))
+        label_pc.grid(columnspan=2, rowspan=1, sticky="nesw", padx=LP, pady=10)
 
         # Hostname
         hostname = self.general_data.hostname
@@ -111,7 +111,7 @@ class GeneralFrame(ctk.CTkFrame):
         # Logo & Section Heading
         label_router = ctk.CTkLabel(frame_router, text="Gateway/Router", anchor="w")
         label_router.configure(font=self.poppins_400, text_color=TEXT_CLR_700)
-        label_router.grid(columnspan=2, rowspan=1, sticky="nesw", padx=(LP), pady=(10))
+        label_router.grid(columnspan=2, rowspan=1, sticky="nesw", padx=LP, pady=10)
 
         # Router - IPv4
         # r_ipv4 = self.general_data["router_ipv4"]
@@ -157,7 +157,7 @@ class GeneralFrame(ctk.CTkFrame):
         # Logo & Section Heading
         label_public = ctk.CTkLabel(frame_public, text="Public", anchor="w")
         label_public.configure(font=self.poppins_400, text_color=TEXT_CLR_700)
-        label_public.grid(columnspan=2, rowspan=1, sticky="nesw", padx=(LP), pady=(10))
+        label_public.grid(columnspan=2, rowspan=1, sticky="nesw", padx=LP, pady=10)
 
         # Public IPv4
         p_ipv4 = self.geolocation_data.public_ip
@@ -196,7 +196,7 @@ class GeneralFrame(ctk.CTkFrame):
         # Logo & Section Heading
         label_geoip = ctk.CTkLabel(frame_geoip, text="IP Geolocation", anchor="w")
         label_geoip.configure(font=self.poppins_400, text_color=TEXT_CLR_700)
-        label_geoip.grid(columnspan=2, rowspan=1, sticky="nesw", padx=(LP), pady=(10))
+        label_geoip.grid(columnspan=2, rowspan=1, sticky="nesw", padx=LP, pady=10)
 
         # Continent & Continent Code
         continent = self.geolocation_data.continent

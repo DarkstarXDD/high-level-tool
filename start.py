@@ -1,3 +1,6 @@
+# pylint: disable=no-member
+# pylint: disable=protected-access
+
 import os
 import sys
 import json
@@ -5,12 +8,11 @@ import json
 import customtkinter as ctk
 
 import sidebar
-import sidebarButton as sb
-import currentFrame
-import hoverArea
+import sidebar_button as sb
+import currentframe
+import hoverarea
 
-import generalFrame
-import networkFrame
+from frames import general
 from frames import usagemonitor
 from frames import pingsweep
 from frames import portscan
@@ -18,6 +20,7 @@ from frames import ping
 from frames import traceroute
 from frames import maclookup
 
+import networkFrame
 
 SIDEBAR_WIDTH = 0.15
 CURRENT_FRAME_HEIGHT = 0.95
@@ -33,10 +36,10 @@ class RunApp:
         ctk.set_default_color_theme(self.resource_path("./data/blue.json"))
 
         sidebar_frame = sidebar.Sidebar(window, SIDEBAR_WIDTH)
-        current_frame = currentFrame.CurrentFrame(
+        current_frame = currentframe.CurrentFrame(
             window, SIDEBAR_WIDTH, CURRENT_FRAME_HEIGHT
         )
-        hover_area = hoverArea.HoverArea(window, SIDEBAR_WIDTH, CURRENT_FRAME_HEIGHT)
+        hover_area = hoverarea.HoverArea(window, SIDEBAR_WIDTH, CURRENT_FRAME_HEIGHT)
 
         with open(
             file=self.resource_path("./data/tooltips.json"),
@@ -53,7 +56,7 @@ class RunApp:
             descriptions = json.load(descriptions_file)
 
         # Frames
-        general_frame = generalFrame.GeneralFrame(current_frame, hover_area, tooltips)
+        general_frame = general.GeneralFrame(current_frame, hover_area, tooltips)
         network_frame = networkFrame.NetworkFrame(current_frame)
         usage_frame = usagemonitor.UsageMonitorFrame(
             current_frame, hover_area, tooltips
