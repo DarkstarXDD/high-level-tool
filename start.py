@@ -20,8 +20,6 @@ from frames import ping
 from frames import traceroute
 from frames import maclookup
 
-import networkFrame
-
 SIDEBAR_WIDTH = 0.15
 CURRENT_FRAME_HEIGHT = 0.95
 
@@ -57,7 +55,6 @@ class RunApp:
 
         # Frames
         general_frame = general.GeneralFrame(current_frame, hover_area, tooltips)
-        network_frame = networkFrame.NetworkFrame(current_frame)
         usage_frame = usagemonitor.UsageMonitorFrame(
             current_frame, hover_area, tooltips
         )
@@ -79,7 +76,6 @@ class RunApp:
 
         # Sidebar Buttons
         sb.SidebarButton(sidebar_frame, "General", general_frame)
-        sb.SidebarButton(sidebar_frame, "Network Interfaces", network_frame)
         sb.SidebarButton(sidebar_frame, "Data Usage Monitor", usage_frame)
         sb.SidebarButton(sidebar_frame, "Ping Sweep", pingsweep_frame)
         sb.SidebarButton(sidebar_frame, "Port Scanner", portscan_frame)
