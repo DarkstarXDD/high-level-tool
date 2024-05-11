@@ -46,7 +46,7 @@ class TracerouteFrame(ctk.CTkFrame):
         label_target.grid(row=0, column=0, sticky="nesw", padx=15, pady=5)
 
         label_target.bind(
-            "<Enter>", lambda event: hover.display(tooltips["traceroute"])
+            "<Enter>", lambda event: hover.display(tooltips["traceroute_target"])
         )
         label_target.bind("<Leave>", lambda event: hover.display(""))
 

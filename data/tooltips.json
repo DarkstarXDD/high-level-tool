@@ -3,9 +3,9 @@
   "ipv4": "Address used to identify your device within your home or local network. It's like your device's home address within your own network.",
   "ipv6": "Address used to identify your device within your home or local network. Compared to IPv4, this has more space for unique addresses.",
   "mac_address": "Unique identifier assigned to the network interface of your device.",
-  "r_ipv4": "Address of the router/gateway of your network",
-  "r_ipv6": "Address of the router/gateway of your network",
-  "pub_ipv4": "Address used to identify your router/gateway device on the internet. It's your network's public address in the online world.",
+  "router_ipv4": "Address of the router/gateway of your network",
+  "router_ipv6": "Address of the router/gateway of your network",
+  "public_ipv4": "Address used to identify your router/gateway device on the internet. It's your network's public address in the online world.",
   "isp": "Internet Service Provider. The name of the company that provides your internet connection.",
   "asn": "A unique number assigned to an Autonomous System (AS), which is a collection of IP networks and routers under the control of one organization.",
   "as_name": "Refers to the name associated with an ASN. It typically represents the organization or entity that owns or operates the autonomous system.",
@@ -14,12 +14,12 @@
   "usage_upload": "Amount of data in MegaBytes that has been sent from the system.",
   "usage_download": "Amount of data in MegaBytes that has been received from the system.",
 
-  "pingsweep": "IP Address range should be in the given format. Ex: 192.168.1.0/24",
+  "pingsweep_target": "IP Address range should be in the given format. Ex: 192.168.1.0/24",
   "port_target": "IP Address or domain name of the device you want to scan. It's like the destination you want to explore.",
   "port_start": "Starting port for the scan. The scan will be done from this port to the end port.",
   "port_end": "Ending port for the scan. The scan will be done from the starting port to this port.",
 
   "ping_target": "IP address or domain name of the device you want to ping.",
-  "traceroute": "IP address or domain name of the destination your packet needs to reach.",
-  "macaddr_lookup": "MAC Address you want to search for."
+  "traceroute_target": "IP address or domain name of the destination your packet needs to reach.",
+  "maclookup_target": "MAC Address you want to search for."
 }

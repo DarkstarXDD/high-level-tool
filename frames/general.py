@@ -119,11 +119,13 @@ class GeneralFrame(ctk.CTkFrame):
         r_ipv4_name.grid(column=0, row=1, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         r_ipv4_name.configure(font=self.poppins_200)
 
-        r_ipv4_value = ctk.CTkLabel(frame_router, text="192.168.1.1", anchor="w")
+        r_ipv4_value = ctk.CTkLabel(frame_router, text="-", anchor="w")
         r_ipv4_value.grid(column=1, row=1, sticky="nesw", padx=(0, 10), pady=(0, 5))
         r_ipv4_value.configure(font=self.poppins_300)
 
-        r_ipv4_name.bind("<Enter>", lambda event: hover.display(tooltips["r_ipv4"]))
+        r_ipv4_name.bind(
+            "<Enter>", lambda event: hover.display(tooltips["router_ipv4"])
+        )
         r_ipv4_name.bind("<Leave>", lambda event: hover.display(""))
 
         # Router - IPv6
@@ -132,11 +134,13 @@ class GeneralFrame(ctk.CTkFrame):
         r_ipv6_name.grid(column=0, row=2, sticky="nesw", padx=(LP, 0), pady=(0, 5))
         r_ipv6_name.configure(font=self.poppins_200)
 
-        r_ipv6_value = ctk.CTkLabel(frame_router, text="fe:800", anchor="w")
+        r_ipv6_value = ctk.CTkLabel(frame_router, text="-", anchor="w")
         r_ipv6_value.grid(column=1, row=2, sticky="nesw", padx=(0, 10), pady=(0, 5))
         r_ipv6_value.configure(font=self.poppins_300)
 
-        r_ipv6_name.bind("<Enter>", lambda event: hover.display(tooltips["r_ipv6"]))
+        r_ipv6_name.bind(
+            "<Enter>", lambda event: hover.display(tooltips["router_ipv6"])
+        )
         r_ipv6_name.bind("<Leave>", lambda event: hover.display(""))
 
         # Dummy
@@ -169,7 +173,9 @@ class GeneralFrame(ctk.CTkFrame):
         p_ipv4_value.grid(column=1, row=1, sticky="nesw", padx=(0, 10), pady=(0, 5))
         p_ipv4_value.configure(font=self.poppins_300)
 
-        p_ipv4_name.bind("<Enter>", lambda event: hover.display(tooltips["pub_ipv4"]))
+        p_ipv4_name.bind(
+            "<Enter>", lambda event: hover.display(tooltips["public_ipv4"])
+        )
         p_ipv4_name.bind("<Leave>", lambda event: hover.display(""))
 
         # Dummy

@@ -48,7 +48,7 @@ class MacLookupFrame(ctk.CTkFrame):
         label_target.grid(row=0, column=0, sticky="nesw", padx=15, pady=5)
 
         label_target.bind(
-            "<Enter>", lambda event: hover.display(tooltips["macaddr_lookup"])
+            "<Enter>", lambda event: hover.display(tooltips["maclookup_target"])
         )
         label_target.bind("<Leave>", lambda event: hover.display(""))
 

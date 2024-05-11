@@ -47,7 +47,9 @@ class PingSweepFrame(ctk.CTkFrame):
         lbl_range.configure(font=self.poppins_200)
         lbl_range.grid(row=0, column=0, sticky="nesw", padx=15, pady=5)
 
-        lbl_range.bind("<Enter>", lambda event: hover.display(tooltips["pingsweep"]))
+        lbl_range.bind(
+            "<Enter>", lambda event: hover.display(tooltips["pingsweep_target"])
+        )
         lbl_range.bind("<Leave>", lambda event: hover.display(""))
 
         # -------------------------------- Inputs --------------------------------
