@@ -1,5 +1,5 @@
-import psutil
 import socket
+import psutil
 
 
 class GeneralData:

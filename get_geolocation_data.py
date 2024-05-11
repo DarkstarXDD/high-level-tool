@@ -37,7 +37,7 @@ class GeoLocationData:
             self.asn = formatted_data.get("as", "-")
             self.as_name = formatted_data.get("asname", "-")
 
-            print("Request to the API endpoint was made")
+            print("Request to the Geolocation API endpoint was made.")
 
         except requests.exceptions.RequestException as e:
             print("Error fetching data from API:", e)

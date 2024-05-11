@@ -3,14 +3,14 @@ import requests
 
 import customtkinter as ctk
 
-import getGeneralData
+import get_general_data
 
 
 class MacLookupFrame(ctk.CTkFrame):
     def __init__(self, parent, hover, tooltips, descriptions):
         super().__init__(parent)
 
-        self.general_data = getGeneralData.GeneralData()
+        self.general_data = get_general_data.GeneralData()
 
         self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
         self.poppins_200 = ctk.CTkFont(family="Poppins", size=14)

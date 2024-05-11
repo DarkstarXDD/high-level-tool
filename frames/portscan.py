@@ -131,7 +131,6 @@ class PortScannerFrame(ctk.CTkFrame):
         PortScan(
             target_ip, starting_port, ending_port, self.main_output, self.stop_flag
         )
-        print("Port Scan is done!")
 
         if self.running:
             self.main_output.insert("end", "\nPort Scan is done!")
@@ -216,7 +215,7 @@ class PortScan:
             port = self.new_queue.get()
 
             if self.scan_port(port):
-                print(f"Port {port} is open!")
+                # print(f"Port {port} is open!")
                 self.main_output.insert(
                     "end", f" \nPort {port} on {self.target_ip} is open!"
                 )

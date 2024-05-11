@@ -118,12 +118,12 @@ class PingFrame(ctk.CTkFrame):
                         "end", "\nPing command execution was interrupted!"
                     )
                     break
-                print(line, end="")
+                # print(line, end="")
                 self.main_output.insert("end", line)
 
             # Read and print error line by line, if there is any.
             for line in iter(ping_process.stderr.readline, ""):
-                print(line, end="")
+                # print(line, end="")
                 self.main_output.insert("end", line)
 
         except Exception as error:

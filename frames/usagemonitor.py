@@ -169,4 +169,4 @@ class UsageMonitorFrame(ctk.CTkFrame):
 
     def on_window_close(self, event):
         self.usage_monitor.stop_monitoring()
-        print("Window closed successfuly")
+        # print("Window closed successfuly")

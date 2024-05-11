@@ -1,4 +1,4 @@
-import getGeoLocationData
+import get_geolocation_data
 import portScanner_old
 
 import tkinter as tk
@@ -197,7 +197,7 @@ class GeneralFrame(ttk.Frame):
         with open("./tooltips.json", "r") as tooltips_file:
             self.tooltips = json.load(tooltips_file)
 
-        self.geolocation_data = getGeoLocationData.GeoLocationData()
+        self.geolocation_data = get_geolocation_data.GeoLocationData()
 
         self.general_data = {
             "hostname": "",

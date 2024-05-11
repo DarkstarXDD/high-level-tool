@@ -11,7 +11,7 @@ import pingFrame
 import tracerouteFrame
 import macLookupFrame
 
-import getGeoLocationData
+import get_geolocation_data
 
 import customtkinter as ctk
 

@@ -1,6 +1,6 @@
 import customtkinter as ctk
-import getGeneralData
-import getGeoLocationData
+import get_general_data
+import get_geolocation_data
 
 TEXT_CLR_700 = "#2586D0"
 LP = 15  # PadX - Left (Left Padding)
@@ -10,8 +10,8 @@ class GeneralFrame(ctk.CTkFrame):
     def __init__(self, parent, hover, tooltips):
         super().__init__(parent)
 
-        self.general_data = getGeneralData.GeneralData()
-        self.geolocation_data = getGeoLocationData.GeoLocationData()
+        self.general_data = get_general_data.GeneralData()
+        self.geolocation_data = get_geolocation_data.GeoLocationData()
 
         self.poppins_200 = ctk.CTkFont(family="Poppins", size=14)
         self.poppins_300 = ctk.CTkFont(family="Poppins Medium", size=14)
